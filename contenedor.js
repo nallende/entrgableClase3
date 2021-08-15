@@ -52,16 +52,19 @@ module.exports = class Contenedor {
       console.error("Este es el err save " + e);
     }
   }
-  async getbyId(id) {
-    let objs = await this.getAll();
-    let index = await objs.filter((elemento) => elemento.id === id);
+  getById = async (id) => {
     try {
-      return index;
-    } catch (e) {
-      console.error("Este es el err getById " + e);
-      return;
+      const lista = await this.getAll();
+
+      const productById = lista.find((product) => product.id == id);
+
+      const resultado = productById ? productById : null;
+
+      return resultado;
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   async deleteById(id) {
     const objs = await this.getAll();
